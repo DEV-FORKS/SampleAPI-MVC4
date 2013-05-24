@@ -1,0 +1,808 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BucketModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="BucketModelStoreContainer">
+          <EntitySet Name="AccessToken" EntityType="BucketModel.Store.AccessToken" store:Type="Tables" store:Schema="dbo" store:Name="AccessToken">
+            <DefiningQuery>SELECT 
+      [AccessToken].[TokenId] AS [TokenId], 
+      [AccessToken].[Token] AS [Token], 
+      [AccessToken].[UserId] AS [UserId], 
+      [AccessToken].[ClientType] AS [ClientType]
+      FROM [dbo].[AccessToken] AS [AccessToken]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Activity" EntityType="BucketModel.Store.Activity" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ActivityList" EntityType="BucketModel.Store.ActivityList" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ActivityListActivity" EntityType="BucketModel.Store.ActivityListActivity" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Friends" EntityType="BucketModel.Store.Friends" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Reviews" EntityType="BucketModel.Store.Reviews" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="BucketModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserActivity" EntityType="BucketModel.Store.UserActivity" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserActivityList" EntityType="BucketModel.Store.UserActivityList" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="BucketModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_AccessToken_Users" Association="BucketModel.Store.FK_AccessToken_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AccessToken" EntitySet="AccessToken" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityListActivities_Activity" Association="BucketModel.Store.FK_ActivityListActivities_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="ActivityListActivity" EntitySet="ActivityListActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityListActivities_ActivityList" Association="BucketModel.Store.FK_ActivityListActivities_ActivityList">
+            <End Role="ActivityList" EntitySet="ActivityList" />
+            <End Role="ActivityListActivity" EntitySet="ActivityListActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Friends_Users_FID" Association="BucketModel.Store.FK_Friends_Users_FID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Friends" EntitySet="Friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Friends_Users_UID" Association="BucketModel.Store.FK_Friends_Users_UID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Friends" EntitySet="Friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Activity" Association="BucketModel.Store.FK_Reviews_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Users" Association="BucketModel.Store.FK_Reviews_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserActivity_Reviews" Association="BucketModel.Store.FK_UserActivity_Reviews">
+            <End Role="Reviews" EntitySet="Reviews" />
+            <End Role="UserActivity" EntitySet="UserActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserActivity_UserActivity" Association="BucketModel.Store.FK_UserActivity_UserActivity">
+            <End Role="ActivityListActivity" EntitySet="ActivityListActivity" />
+            <End Role="UserActivity" EntitySet="UserActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserActivity_Users" Association="BucketModel.Store.FK_UserActivity_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserActivity" EntitySet="UserActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserActivityList_ActivityList" Association="BucketModel.Store.FK_UserActivityList_ActivityList">
+            <End Role="ActivityList" EntitySet="ActivityList" />
+            <End Role="UserActivityList" EntitySet="UserActivityList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserActivityList_Users" Association="BucketModel.Store.FK_UserActivityList_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserActivityList" EntitySet="UserActivityList" />
+          </AssociationSet>
+        </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Bucket.dbo.AccessToken' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="AccessToken">
+          <Key>
+            <PropertyRef Name="TokenId" />
+          </Key>
+          <Property Name="TokenId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="varchar" MaxLength="20" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="ClientType" Type="int" />
+        </EntityType>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="City" Type="varchar" MaxLength="250" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Zipcode" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ActivityList">
+          <Key>
+            <PropertyRef Name="ActivityListId" />
+          </Key>
+          <Property Name="ActivityListId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="NumOfUsers" Type="int" />
+          <Property Name="NumOfActivity" Type="int" />
+          <Property Name="CreatedByUserId" Type="int" />
+        </EntityType>
+        <EntityType Name="ActivityListActivity">
+          <Key>
+            <PropertyRef Name="ActivityListActivityId" />
+          </Key>
+          <Property Name="ActivityListActivityId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityId" Type="bigint" />
+          <Property Name="ActivityListId" Type="bigint" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Friends">
+          <Key>
+            <PropertyRef Name="FId" />
+          </Key>
+          <Property Name="FId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="FriendId" Type="bigint" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityId" Type="bigint" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="Review" Type="varchar(max)" />
+          <Property Name="ReviewDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserActivity">
+          <Key>
+            <PropertyRef Name="UserActivityId" />
+          </Key>
+          <Property Name="UserActivityId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityListActivityId" Type="bigint" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="ReviewId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="UserActivityList">
+          <Key>
+            <PropertyRef Name="UserActivityListId" />
+          </Key>
+          <Property Name="UserActivityListId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="ActivityListId" Type="bigint" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UsersId" />
+          </Key>
+          <Property Name="UsersId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="FName" Type="varchar" MaxLength="250" />
+          <Property Name="LName" Type="varchar" MaxLength="250" />
+          <Property Name="NickName" Type="varchar" MaxLength="250" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="Zipcode" Type="varchar" MaxLength="250" />
+          <Property Name="DOB" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_AccessToken_Users">
+          <End Role="Users" Type="BucketModel.Store.Users" Multiplicity="0..1" />
+          <End Role="AccessToken" Type="BucketModel.Store.AccessToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UsersId" />
+            </Principal>
+            <Dependent Role="AccessToken">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityListActivities_Activity">
+          <End Role="Activity" Type="BucketModel.Store.Activity" Multiplicity="0..1" />
+          <End Role="ActivityListActivity" Type="BucketModel.Store.ActivityListActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="ActivityId" />
+            </Principal>
+            <Dependent Role="ActivityListActivity">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityListActivities_ActivityList">
+          <End Role="ActivityList" Type="BucketModel.Store.ActivityList" Multiplicity="0..1" />
+          <End Role="ActivityListActivity" Type="BucketModel.Store.ActivityListActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityList">
+              <PropertyRef Name="ActivityListId" />
+            </Principal>
+            <Dependent Role="ActivityListActivity">
+              <PropertyRef Name="ActivityListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Friends_Users_FID">
+          <End Role="Users" Type="BucketModel.Store.Users" Multiplicity="0..1" />
+          <End Role="Friends" Type="BucketModel.Store.Friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UsersId" />
+            </Principal>
+            <Dependent Role="Friends">
+              <PropertyRef Name="FriendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Friends_Users_UID">
+          <End Role="Users" Type="BucketModel.Store.Users" Multiplicity="0..1" />
+          <End Role="Friends" Type="BucketModel.Store.Friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UsersId" />
+            </Principal>
+            <Dependent Role="Friends">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Activity">
+          <End Role="Activity" Type="BucketModel.Store.Activity" Multiplicity="0..1" />
+          <End Role="Reviews" Type="BucketModel.Store.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="ActivityId" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Users">
+          <End Role="Users" Type="BucketModel.Store.Users" Multiplicity="0..1" />
+          <End Role="Reviews" Type="BucketModel.Store.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UsersId" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserActivity_Reviews">
+          <End Role="Reviews" Type="BucketModel.Store.Reviews" Multiplicity="0..1" />
+          <End Role="UserActivity" Type="BucketModel.Store.UserActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reviews">
+              <PropertyRef Name="ReviewId" />
+            </Principal>
+            <Dependent Role="UserActivity">
+              <PropertyRef Name="ReviewId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserActivity_UserActivity">
+          <End Role="ActivityListActivity" Type="BucketModel.Store.ActivityListActivity" Multiplicity="0..1" />
+          <End Role="UserActivity" Type="BucketModel.Store.UserActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityListActivity">
+              <PropertyRef Name="ActivityListActivityId" />
+            </Principal>
+            <Dependent Role="UserActivity">
+              <PropertyRef Name="ActivityListActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserActivity_Users">
+          <End Role="Users" Type="BucketModel.Store.Users" Multiplicity="0..1" />
+          <End Role="UserActivity" Type="BucketModel.Store.UserActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UsersId" />
+            </Principal>
+            <Dependent Role="UserActivity">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserActivityList_ActivityList">
+          <End Role="ActivityList" Type="BucketModel.Store.ActivityList" Multiplicity="0..1" />
+          <End Role="UserActivityList" Type="BucketModel.Store.UserActivityList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityList">
+              <PropertyRef Name="ActivityListId" />
+            </Principal>
+            <Dependent Role="UserActivityList">
+              <PropertyRef Name="ActivityListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserActivityList_Users">
+          <End Role="Users" Type="BucketModel.Store.Users" Multiplicity="0..1" />
+          <End Role="UserActivityList" Type="BucketModel.Store.UserActivityList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UsersId" />
+            </Principal>
+            <Dependent Role="UserActivityList">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BucketModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BucketEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="AccessTokens" EntityType="BucketModel.AccessToken" />
+          <EntitySet Name="Activities" EntityType="BucketModel.Activity" />
+          <EntitySet Name="ActivityLists" EntityType="BucketModel.ActivityList" />
+          <EntitySet Name="ActivityListActivities" EntityType="BucketModel.ActivityListActivity" />
+          <EntitySet Name="Friends" EntityType="BucketModel.Friend" />
+          <EntitySet Name="Reviews" EntityType="BucketModel.Review" />
+          <EntitySet Name="sysdiagrams" EntityType="BucketModel.sysdiagram" />
+          <EntitySet Name="UserActivities" EntityType="BucketModel.UserActivity" />
+          <EntitySet Name="UserActivityLists" EntityType="BucketModel.UserActivityList" />
+          <EntitySet Name="Users" EntityType="BucketModel.User" />
+          <AssociationSet Name="FK_AccessToken_Users" Association="BucketModel.FK_AccessToken_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AccessToken" EntitySet="AccessTokens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityListActivities_Activity" Association="BucketModel.FK_ActivityListActivities_Activity">
+            <End Role="Activity" EntitySet="Activities" />
+            <End Role="ActivityListActivity" EntitySet="ActivityListActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Activity" Association="BucketModel.FK_Reviews_Activity">
+            <End Role="Activity" EntitySet="Activities" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityListActivities_ActivityList" Association="BucketModel.FK_ActivityListActivities_ActivityList">
+            <End Role="ActivityList" EntitySet="ActivityLists" />
+            <End Role="ActivityListActivity" EntitySet="ActivityListActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserActivityList_ActivityList" Association="BucketModel.FK_UserActivityList_ActivityList">
+            <End Role="ActivityList" EntitySet="ActivityLists" />
+            <End Role="UserActivityList" EntitySet="UserActivityLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserActivity_UserActivity" Association="BucketModel.FK_UserActivity_UserActivity">
+            <End Role="ActivityListActivity" EntitySet="ActivityListActivities" />
+            <End Role="UserActivity" EntitySet="UserActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Friends_Users_FID" Association="BucketModel.FK_Friends_Users_FID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Friends" EntitySet="Friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Friends_Users_UID" Association="BucketModel.FK_Friends_Users_UID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Friends" EntitySet="Friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Users" Association="BucketModel.FK_Reviews_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserActivity_Reviews" Association="BucketModel.FK_UserActivity_Reviews">
+            <End Role="Reviews" EntitySet="Reviews" />
+            <End Role="UserActivity" EntitySet="UserActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserActivity_Users" Association="BucketModel.FK_UserActivity_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserActivity" EntitySet="UserActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserActivityList_Users" Association="BucketModel.FK_UserActivityList_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserActivityList" EntitySet="UserActivityLists" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AccessToken">
+          <Key>
+            <PropertyRef Name="TokenId" />
+          </Key>
+          <Property Name="TokenId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="ClientType" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="BucketModel.FK_AccessToken_Users" FromRole="AccessToken" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Address" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ActivityListActivities" Relationship="BucketModel.FK_ActivityListActivities_Activity" FromRole="Activity" ToRole="ActivityListActivity" />
+          <NavigationProperty Name="Reviews" Relationship="BucketModel.FK_Reviews_Activity" FromRole="Activity" ToRole="Reviews" />
+        </EntityType>
+        <EntityType Name="ActivityList">
+          <Key>
+            <PropertyRef Name="ActivityListId" />
+          </Key>
+          <Property Name="ActivityListId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="NumOfUsers" Type="Int32" />
+          <Property Name="NumOfActivity" Type="Int32" />
+          <Property Name="CreatedByUserId" Type="Int32" />
+          <NavigationProperty Name="ActivityListActivities" Relationship="BucketModel.FK_ActivityListActivities_ActivityList" FromRole="ActivityList" ToRole="ActivityListActivity" />
+          <NavigationProperty Name="UserActivityLists" Relationship="BucketModel.FK_UserActivityList_ActivityList" FromRole="ActivityList" ToRole="UserActivityList" />
+        </EntityType>
+        <EntityType Name="ActivityListActivity">
+          <Key>
+            <PropertyRef Name="ActivityListActivityId" />
+          </Key>
+          <Property Name="ActivityListActivityId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityId" Type="Int64" />
+          <Property Name="ActivityListId" Type="Int64" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Activity" Relationship="BucketModel.FK_ActivityListActivities_Activity" FromRole="ActivityListActivity" ToRole="Activity" />
+          <NavigationProperty Name="ActivityList" Relationship="BucketModel.FK_ActivityListActivities_ActivityList" FromRole="ActivityListActivity" ToRole="ActivityList" />
+          <NavigationProperty Name="UserActivities" Relationship="BucketModel.FK_UserActivity_UserActivity" FromRole="ActivityListActivity" ToRole="UserActivity" />
+        </EntityType>
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="FId" />
+          </Key>
+          <Property Name="FId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="FriendId" Type="Int64" />
+          <Property Name="Status" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="BucketModel.FK_Friends_Users_FID" FromRole="Friends" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="BucketModel.FK_Friends_Users_UID" FromRole="Friends" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityId" Type="Int64" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="Review1" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="ReviewDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Activity" Relationship="BucketModel.FK_Reviews_Activity" FromRole="Reviews" ToRole="Activity" />
+          <NavigationProperty Name="User" Relationship="BucketModel.FK_Reviews_Users" FromRole="Reviews" ToRole="Users" />
+          <NavigationProperty Name="UserActivities" Relationship="BucketModel.FK_UserActivity_Reviews" FromRole="Reviews" ToRole="UserActivity" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserActivity">
+          <Key>
+            <PropertyRef Name="UserActivityId" />
+          </Key>
+          <Property Name="UserActivityId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityListActivityId" Type="Int64" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="Status" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ReviewId" Type="Int64" />
+          <NavigationProperty Name="ActivityListActivity" Relationship="BucketModel.FK_UserActivity_UserActivity" FromRole="UserActivity" ToRole="ActivityListActivity" />
+          <NavigationProperty Name="Review" Relationship="BucketModel.FK_UserActivity_Reviews" FromRole="UserActivity" ToRole="Reviews" />
+          <NavigationProperty Name="User" Relationship="BucketModel.FK_UserActivity_Users" FromRole="UserActivity" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="UserActivityList">
+          <Key>
+            <PropertyRef Name="UserActivityListId" />
+          </Key>
+          <Property Name="UserActivityListId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="ActivityListId" Type="Int64" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ActivityList" Relationship="BucketModel.FK_UserActivityList_ActivityList" FromRole="UserActivityList" ToRole="ActivityList" />
+          <NavigationProperty Name="User" Relationship="BucketModel.FK_UserActivityList_Users" FromRole="UserActivityList" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UsersId" />
+          </Key>
+          <Property Name="UsersId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="FName" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="LName" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="NickName" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AccessTokens" Relationship="BucketModel.FK_AccessToken_Users" FromRole="Users" ToRole="AccessToken" />
+          <NavigationProperty Name="Friends" Relationship="BucketModel.FK_Friends_Users_FID" FromRole="Users" ToRole="Friends" />
+          <NavigationProperty Name="Friends1" Relationship="BucketModel.FK_Friends_Users_UID" FromRole="Users" ToRole="Friends" />
+          <NavigationProperty Name="Reviews" Relationship="BucketModel.FK_Reviews_Users" FromRole="Users" ToRole="Reviews" />
+          <NavigationProperty Name="UserActivities" Relationship="BucketModel.FK_UserActivity_Users" FromRole="Users" ToRole="UserActivity" />
+          <NavigationProperty Name="UserActivityLists" Relationship="BucketModel.FK_UserActivityList_Users" FromRole="Users" ToRole="UserActivityList" />
+        </EntityType>
+        <Association Name="FK_AccessToken_Users">
+          <End Role="Users" Type="BucketModel.User" Multiplicity="0..1" />
+          <End Role="AccessToken" Type="BucketModel.AccessToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UsersId" />
+            </Principal>
+            <Dependent Role="AccessToken">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityListActivities_Activity">
+          <End Role="Activity" Type="BucketModel.Activity" Multiplicity="0..1" />
+          <End Role="ActivityListActivity" Type="BucketModel.ActivityListActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="ActivityId" />
+            </Principal>
+            <Dependent Role="ActivityListActivity">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Activity">
+          <End Role="Activity" Type="BucketModel.Activity" Multiplicity="0..1" />
+          <End Role="Reviews" Type="BucketModel.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="ActivityId" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityListActivities_ActivityList">
+          <End Role="ActivityList" Type="BucketModel.ActivityList" Multiplicity="0..1" />
+          <End Role="ActivityListActivity" Type="BucketModel.ActivityListActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityList">
+              <PropertyRef Name="ActivityListId" />
+            </Principal>
+            <Dependent Role="ActivityListActivity">
+              <PropertyRef Name="ActivityListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserActivityList_ActivityList">
+          <End Role="ActivityList" Type="BucketModel.ActivityList" Multiplicity="0..1" />
+          <End Role="UserActivityList" Type="BucketModel.UserActivityList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityList">
+              <PropertyRef Name="ActivityListId" />
+            </Principal>
+            <Dependent Role="UserActivityList">
+              <PropertyRef Name="ActivityListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserActivity_UserActivity">
+          <End Role="ActivityListActivity" Type="BucketModel.ActivityListActivity" Multiplicity="0..1" />
+          <End Role="UserActivity" Type="BucketModel.UserActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityListActivity">
+              <PropertyRef Name="ActivityListActivityId" />
+            </Principal>
+            <Dependent Role="UserActivity">
+              <PropertyRef Name="ActivityListActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Friends_Users_FID">
+          <End Role="Users" Type="BucketModel.User" Multiplicity="0..1" />
+          <End Role="Friends" Type="BucketModel.Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UsersId" />
+            </Principal>
+            <Dependent Role="Friends">
+              <PropertyRef Name="FriendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Friends_Users_UID">
+          <End Role="Users" Type="BucketModel.User" Multiplicity="0..1" />
+          <End Role="Friends" Type="BucketModel.Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UsersId" />
+            </Principal>
+            <Dependent Role="Friends">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Users">
+          <End Role="Users" Type="BucketModel.User" Multiplicity="0..1" />
+          <End Role="Reviews" Type="BucketModel.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UsersId" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserActivity_Reviews">
+          <End Role="Reviews" Type="BucketModel.Review" Multiplicity="0..1" />
+          <End Role="UserActivity" Type="BucketModel.UserActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reviews">
+              <PropertyRef Name="ReviewId" />
+            </Principal>
+            <Dependent Role="UserActivity">
+              <PropertyRef Name="ReviewId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserActivity_Users">
+          <End Role="Users" Type="BucketModel.User" Multiplicity="0..1" />
+          <End Role="UserActivity" Type="BucketModel.UserActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UsersId" />
+            </Principal>
+            <Dependent Role="UserActivity">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserActivityList_Users">
+          <End Role="Users" Type="BucketModel.User" Multiplicity="0..1" />
+          <End Role="UserActivityList" Type="BucketModel.UserActivityList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UsersId" />
+            </Principal>
+            <Dependent Role="UserActivityList">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BucketModelStoreContainer" CdmEntityContainer="BucketEntities">
+          <EntitySetMapping Name="AccessTokens">
+            <EntityTypeMapping TypeName="BucketModel.AccessToken">
+              <MappingFragment StoreEntitySet="AccessToken">
+                <ScalarProperty Name="TokenId" ColumnName="TokenId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClientType" ColumnName="ClientType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Activities">
+            <EntityTypeMapping TypeName="BucketModel.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityLists">
+            <EntityTypeMapping TypeName="BucketModel.ActivityList">
+              <MappingFragment StoreEntitySet="ActivityList">
+                <ScalarProperty Name="ActivityListId" ColumnName="ActivityListId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="NumOfUsers" ColumnName="NumOfUsers" />
+                <ScalarProperty Name="NumOfActivity" ColumnName="NumOfActivity" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityListActivities">
+            <EntityTypeMapping TypeName="BucketModel.ActivityListActivity">
+              <MappingFragment StoreEntitySet="ActivityListActivity">
+                <ScalarProperty Name="ActivityListActivityId" ColumnName="ActivityListActivityId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="ActivityListId" ColumnName="ActivityListId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Friends">
+            <EntityTypeMapping TypeName="BucketModel.Friend">
+              <MappingFragment StoreEntitySet="Friends">
+                <ScalarProperty Name="FId" ColumnName="FId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FriendId" ColumnName="FriendId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="BucketModel.Review">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Review1" ColumnName="Review" />
+                <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BucketModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserActivities">
+            <EntityTypeMapping TypeName="BucketModel.UserActivity">
+              <MappingFragment StoreEntitySet="UserActivity">
+                <ScalarProperty Name="UserActivityId" ColumnName="UserActivityId" />
+                <ScalarProperty Name="ActivityListActivityId" ColumnName="ActivityListActivityId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserActivityLists">
+            <EntityTypeMapping TypeName="BucketModel.UserActivityList">
+              <MappingFragment StoreEntitySet="UserActivityList">
+                <ScalarProperty Name="UserActivityListId" ColumnName="UserActivityListId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActivityListId" ColumnName="ActivityListId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BucketModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UsersId" ColumnName="UsersId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

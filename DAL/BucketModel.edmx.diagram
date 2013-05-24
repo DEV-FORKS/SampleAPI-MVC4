@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f5d5924f6b5d47aca34e743c66a9ccaa" Name="Diagram1">
+        <EntityTypeShape EntityType="BucketModel.AccessToken" Width="1.5" PointX="4.625" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BucketModel.Activity" Width="1.5" PointX="3.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BucketModel.ActivityList" Width="1.5" PointX="0.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BucketModel.ActivityListActivity" Width="1.5" PointX="6" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="BucketModel.Friend" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BucketModel.Review" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BucketModel.sysdiagram" Width="1.5" PointX="5.875" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BucketModel.UserActivity" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BucketModel.UserActivityList" Width="1.5" PointX="2.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BucketModel.User" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="BucketModel.FK_AccessToken_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="BucketModel.FK_ActivityListActivities_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="BucketModel.FK_Reviews_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="BucketModel.FK_ActivityListActivities_ActivityList" ManuallyRouted="false" />
+        <AssociationConnector Association="BucketModel.FK_UserActivityList_ActivityList" ManuallyRouted="false" />
+        <AssociationConnector Association="BucketModel.FK_UserActivity_UserActivity" ManuallyRouted="false" />
+        <AssociationConnector Association="BucketModel.FK_Friends_Users_FID" ManuallyRouted="false" />
+        <AssociationConnector Association="BucketModel.FK_Friends_Users_UID" ManuallyRouted="false" />
+        <AssociationConnector Association="BucketModel.FK_Reviews_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="BucketModel.FK_UserActivity_Reviews" ManuallyRouted="false" />
+        <AssociationConnector Association="BucketModel.FK_UserActivity_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="BucketModel.FK_UserActivityList_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
